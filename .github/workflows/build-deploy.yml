@@ -34,8 +34,8 @@ jobs:
     steps:
       - name: Install PostgreSQL client
         run: |
-          apt-get update
-          apt-get install --yes postgresql-client
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-client --yes
       - name: Query database
         run: psql -h postgres -d postgres_db -U postgres_user -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
       - name: pulling git repo
