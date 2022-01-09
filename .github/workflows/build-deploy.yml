@@ -36,6 +36,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes postgresql-client --yes
+      - run: |
+          psql -h postgres -U postgres -c 'CREATE DATABASE ...'
       - name: pulling git repo
         uses: actions/checkout@v2
       - name: Install python version 3.9
