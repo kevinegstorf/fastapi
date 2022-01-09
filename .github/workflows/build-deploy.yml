@@ -22,9 +22,6 @@ jobs:
         uses: Daniel-Marynicz/postgresql-action@master
         with:
           postgres_image_tag: 12-alpine
-          app_user: ${{secrets.DATABASE_USERNAME}}
-          app_user_password: ${{secrets.DATABASE_USERNAME}}
-          app_db: ${{secrets.DATABASE_USERNAME}}
           postgres_extensions: uuid-ossp ltree
           exposed_postgres_port: 5432
       - name: pulling git repo
