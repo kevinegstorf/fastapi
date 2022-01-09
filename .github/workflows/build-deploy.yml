@@ -7,10 +7,10 @@ jobs:
     environment:
       name: testing
     env:
-      DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
+      DATABASE_HOSTNAME: ${{secrets.DATABASE_USERNAME}}
       DATABASE_PORT: ${{secrets.DATABASE_PORT}}
-      DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-      DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+      DATABASE_PASSWORD: ${{secrets.DATABASE_USERNAME}}
+      DATABASE_NAME: ${{secrets.DATABASE_USERNAME}}}
       DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
@@ -22,9 +22,9 @@ jobs:
         uses: Daniel-Marynicz/postgresql-action@master
         with:
           postgres_image_tag: 12-alpine
-          app_user: postgres
-          app_user_password: postgres
-          app_db: postgres
+          app_user: ${{secrets.DATABASE_USERNAME}}
+          app_user_password: ${{secrets.DATABASE_USERNAME}}
+          app_db: ${{secrets.DATABASE_USERNAME}}
           postgres_extensions: uuid-ossp ltree
           exposed_postgres_port: 5432
       - name: pulling git repo
