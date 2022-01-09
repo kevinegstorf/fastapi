@@ -48,7 +48,7 @@ jobs:
         run: |
             sudo apt-get update
             sudo apt-get install --yes --no-install-recommends postgresql-client
-            sudo psql -h localhost -p 5432 -U postgres -W postgres -c 'CREATE EXTENSION "uuid-ossp";'
+            sudo psql -h localhost -p 5432 -U postgres -W postgres postgres -c 'CREATE EXTENSION "uuid-ossp";'
       - name: test with pytest
         run: |
           pip install pytest
