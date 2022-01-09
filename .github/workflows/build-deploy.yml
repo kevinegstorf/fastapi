@@ -19,11 +19,10 @@ jobs:
 
     services:
       postgres:
-        image: postgres:12-alpine
+        image: postgres
         env:
-          POSTGRES_USER: admin
-          POSTGRES_PASSWORD: admin
-          POSTGRES_DB: app
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         options: >-
