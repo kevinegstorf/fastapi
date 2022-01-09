@@ -44,13 +44,17 @@ jobs:
         run: pip install -r requirements.txt
       - name: install pip install fastapi
         run: pip install fastapi[all]
-      - name: foo
-        run: |
-            sudo apt-get update
-            sudo apt-get install --yes --no-install-recommends postgresql-client
-            psql -U postgres --password
-            password123
-            sudo psql -h localhost -p 5432 -U postgres postgres -c 'CREATE EXTENSION "uuid-ossp";'
+      - name: Connect to PostgreSQL
+        # Runs a script that creates a PostgreSQL table, populates
+        # the table with data, and then retrieves the data
+        run: node client.js
+        # Environment variables used by the `client.js` script to create
+        # a new PostgreSQL table.
+        env:
+          # The hostname used to communicate with the PostgreSQL service container
+          POSTGRES_HOST: localhost
+          # The default PostgreSQL port
+          POSTGRES_PORT: 5432
       - name: test with pytest
         run: |
           pip install pytest
