@@ -32,8 +32,10 @@ jobs:
           --health-retries 5
     runs-on: ubuntu-latest
     steps:
-      - name: Create database
-        run: CREATE EXTENSION "uuid-ossp";
+      - name: add uuid
+        run: |
+          psql 
+          CREATE EXTENSION "uuid-ossp";
       - name: pulling git repo
         uses: actions/checkout@v2
       - name: Install python version 3.9
