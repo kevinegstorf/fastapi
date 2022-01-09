@@ -25,7 +25,8 @@ jobs:
           app_user: postgres
           app_user_password: postgres
           app_db: postgres
-          postgres_extensions: uuid-ossp ltree 
+          postgres_extensions: uuid-ossp ltree
+          exposed_postgres_port: 5432
       - name: pulling git repo
         uses: actions/checkout@v2
       - name: Install python version 3.9
