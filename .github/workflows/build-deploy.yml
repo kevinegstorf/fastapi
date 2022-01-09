@@ -32,6 +32,14 @@ jobs:
           --health-retries 5
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Postgres database
+        uses: Daniel-Marynicz/postgresql-action@master
+        with:
+          postgres_image_tag: 12-alpine
+          app_user: postgres
+          app_user_password: postgres
+          app_db: postgres
+          postgres_extensions: uuid-ossp ltree 
       - name: pulling git repo
         uses: actions/checkout@v2
       - name: Install python version 3.9
@@ -44,23 +52,6 @@ jobs:
         run: pip install -r requirements.txt
       - name: install pip install fastapi
         run: pip install fastapi[all]
-      - name: Check out repository code
-        uses: actions/checkout@v2
-  # Performs a clean installation of all dependencies in the `package.json` file
-  # For more information, see https://docs.npmjs.com/cli/ci.html
-      - name: Install dependencies
-        run: npm ci
-      - name: Connect to PostgreSQL
-        # Runs a script that creates a PostgreSQL table, populates
-        # the table with data, and then retrieves the data
-        run: node client.js
-        # Environment variables used by the `client.js` script to create
-        # a new PostgreSQL table.
-        env:
-          # The hostname used to communicate with the PostgreSQL service container
-          POSTGRES_HOST: localhost
-          # The default PostgreSQL port
-          POSTGRES_PORT: 5432
       - name: test with pytest
         run: |
           pip install pytest
